@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mynotetaking.databinding.FragmentNewNoteBinding
@@ -53,6 +54,9 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
         noteViewModel = (activity as MainActivity).noteViewModel
         currentNote = args.note!!
 
+        val toolbar = binding.toolbar
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
         binding.etNoteBodyUpdate.setText(currentNote.noteBody)
         binding.etNoteTitleUpdate.setText(currentNote.noteTitle)
 
@@ -80,11 +84,11 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
         val id = item.itemId
         when(id){
             R.id.menu_delete -> deleteNote()
         }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun deleteNote(){
